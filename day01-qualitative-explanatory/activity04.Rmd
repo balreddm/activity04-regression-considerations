@@ -5,4 +5,37 @@ output: github_document
 
 ```{r setup, include=FALSE}
 knitr::opts_chunk$set(echo = TRUE)
+library(GGally)
 ```
+
+```{r}
+library(tidyverse)
+library(tidymodels)
+```
+
+
+```{r}
+evals = readr::read_tsv("https://www.openintro.org/data/tab-delimited/evals.txt")
+```
+```{r}
+dplyr::glimpse
+```
+```{r}
+m_bty_gen <- lm(score ~ bty_avg + gender, data = evals)
+tidy(m_bty_gen)
+```
+```{r}
+m_int <- lm(score ~ bty_avg * gender, data = evals)
+tidy(m_int)
+```
+```{r}
+m_int <- lm(score ~ bty_avg + gender + bty_avg * gender, data = evals)
+tidy(m_int)
+```
+
+
+```{r}
+m_int <- lm(score ~ bty_avg * rank, data = evals)
+tidy(m_int)
+```
+
